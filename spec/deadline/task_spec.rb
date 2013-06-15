@@ -66,8 +66,32 @@ module Deadline
     end
 
     describe ".remove" do
-      it "" do
-        ;
+      before do
+        path = File.expand_path('~/.deadline/')
+        if FileTest.exist?(path) == false
+          FileUtils.mkdir_p(path)
+        end
+
+        File.open(File.expand_path('~/.deadline/tasks.yml'), 'w') do |f|
+          f << { tasks: [
+              {task: "task1", deadline: "13:30"},
+              {task: "task2", deadline: "14:30"},
+            ] }.to_yaml
+        end
+      end
+
+      describe "given a number within range" do
+        it "should remove a specific task" do
+          Task.remove(1)
+          Task.all.size.should == 1
+        end
+      end
+
+      describe "given a number out of range" do
+        it "should do nothing" do
+          Task.remove(2)
+          Task.all.size.should == 2
+        end
       end
     end
   end
