@@ -37,18 +37,18 @@ module Deadline
     end
 
     describe ".add" do
-      describe "given a task name and valid time" do
-        before do
-          path = File.expand_path('~/.deadline/')
-          if FileTest.exist?(path) == false
-            FileUtils.mkdir_p(path)
-          end
-
-          File.open(File.expand_path('~/.deadline/tasks.yml'), 'w') do |f|
-            f << { tasks: [{task: "test", deadline: "13:30"}] }.to_yaml
-          end
+      before do
+        path = File.expand_path('~/.deadline/')
+        if FileTest.exist?(path) == false
+          FileUtils.mkdir_p(path)
         end
 
+        File.open(File.expand_path('~/.deadline/tasks.yml'), 'w') do |f|
+          f << { tasks: [{task: "test", deadline: "13:30"}] }.to_yaml
+        end
+      end
+
+      describe "given a task name and valid time" do
         it "should add a task to deadline" do
           Task.add(task: "new task", deadline: "14:00")
           array = Task.all
@@ -58,7 +58,9 @@ module Deadline
 
       describe "given invalid time" do
         it "should not add a task" do
-          ;
+          Task.add(task: "new task", deadline: "hoge")
+          array = Task.all
+          array.size.should == 1
         end
       end
     end
