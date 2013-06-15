@@ -8,7 +8,7 @@ Gem::Specification.new do |spec|
   spec.version       = Deadline::VERSION
   spec.authors       = ["ikstrm"]
   spec.email         = ["kokubun.t.aa@m.titech.ac.jp"]
-  spec.description   = %q{Manage deadlines of your tasks}
+  spec.description   = %q{Manage deadlines of your tasks and show timer for you}
   spec.summary       = %q{Manage deadlines of your tasks}
   spec.homepage      = "https://github.com/ikstrm/deadline"
   spec.license       = "MIT"

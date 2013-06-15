@@ -5,7 +5,21 @@ module Deadline
     CONFIG_PATH = File.expand_path('~/.deadline/tasks.yml')
 
     def self.all
-      @tasks = load_config
+      conf = load_config
+      return unless conf
+      conf[:tasks]
+    end
+
+    def self.add(args = {})
+      return unless args[:task] && deadline[:deadline]
+
+      conf = load_config
+      if conf
+      else
+        conf = Hash.new
+        conf[:task] = args[:task]
+        conf[:deadline] = args[:deadline]
+      end
     end
 
     def self.load_config
@@ -23,6 +37,12 @@ module Deadline
         YAML.load(str)
       else
         nil
+      end
+    end
+
+    def self.save_config(conf)
+      File.open(CONFIG_PATH, 'w') do |f|
+        f << conf.to_yaml
       end
     end
   end
