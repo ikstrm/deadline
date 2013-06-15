@@ -25,7 +25,7 @@ module Deadline
           end
 
           File.open(File.expand_path('~/.deadline/tasks.yml'), 'w') do |f|
-            f << [{task: "test", deadline: "13:30"}].to_yaml
+            f << { tasks: [{task: "test", deadline: "13:30"}] }.to_yaml
           end
         end
 
