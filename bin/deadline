@@ -1,0 +1,10 @@
+#!/usr/bin/env ruby
+# -*- coding: utf-8 -*-
+
+lib = File.dirname(__FILE__) + '/../lib'
+$:.unshift lib unless $:.include? lib
+
+# require 'deadline'
+
+# Tomodachi::setup
+puts "hello"
