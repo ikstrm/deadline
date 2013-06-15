@@ -3,9 +3,36 @@ require 'spec_helper'
 module Deadline
   describe Task do
     describe ".all" do
-      it "should return hash" do
-        tasks = Task.all
-        tasks.should be_a_kind_of Hash
+      describe "given no config file" do
+        before do
+          path = File.expand_path('~/.deadline/tasks.yml')
+          if FileTest.exist?(path)
+            FileUtils.rm(path)
+          end
+        end
+
+        it "should return nil" do
+          tasks = Task.all
+          tasks.should == nil
+        end
+      end
+
+      describe "when config file exists" do
+        before do
+          path = File.expand_path('~/.deadline/')
+          if FileTest.exist?(path) == false
+            FileUtils.mkdir_p(path)
+          end
+
+          File.open(File.expand_path('~/.deadline/tasks.yml'), 'w') do |f|
+            f << [{task: "test", deadline: "13:30"}].to_yaml
+          end
+        end
+
+        it "should return array" do
+          tasks = Task.all
+          tasks.should be_a_kind_of Array
+        end
       end
     end
 
