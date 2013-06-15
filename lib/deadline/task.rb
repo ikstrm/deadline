@@ -11,15 +11,20 @@ module Deadline
     end
 
     def self.add(args = {})
-      return unless args[:task] && deadline[:deadline]
+      return unless args[:task] && args[:deadline]
 
+      new_task = {
+        task: args[:task],
+        deadline: args[:deadline],
+      }
       conf = load_config
       if conf
+        conf[:tasks].push(new_task)
       else
         conf = Hash.new
-        conf[:task] = args[:task]
-        conf[:deadline] = args[:deadline]
+        conf[:tasks] = Array.new.push(new_task)
       end
+      save_config(conf)
     end
 
     def self.load_config
