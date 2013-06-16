@@ -29,25 +29,35 @@ module Deadline
         conf[:tasks] = Array.new.push(new_task)
       end
       save_config(conf)
+      puts "New task: #{new_task[:task]}, #{new_task[:deadline]}"
     end
 
-    def self.remove(number)
+    def self.remove(target)
       tasks = Task.all
       return unless tasks
 
-      if number < tasks.size
-        tasks.delete_at(number)
-        conf = {
-          tasks: tasks
-        }
-        save_config(conf)
+      if target == "all"
+        save_config({tasks: []})
+      else
+        number = target.to_i
+        if number < tasks.size
+          tasks.delete_at(number)
+          conf = {
+            tasks: tasks
+          }
+          save_config(conf)
+        end
       end
     end
 
     def self.print_tasks
       tasks = Task.all
-      tasks.each do |task|
-        ;puts
+      if tasks == nil || tasks.size == 0
+        puts "No task available"
+        return
+      end
+      tasks.each_with_index do |task, idx|
+        puts "Task #{idx}: #{task[:task]}, #{task[:deadline]}"
       end
     end
 

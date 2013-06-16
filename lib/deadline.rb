@@ -12,16 +12,20 @@ module Deadline
       end
       Task.add(task: ARGV[1], deadline: ARGV[2])
     when "remove"
-      puts "pending"
+      if ARGV.size < 2
+        puts "Usage: deadline remove (all|TASK_NUMBER)"
+        return
+      end
+      Task.remove(ARGV[1])
     when "tasks"
-      ;
+      Task.print_tasks
     when "track"
       puts "pending"
     else
       print(<<-"EOS")
       Usage:
         deadline add TASK_NAME DEADLINE
-        deadline remove TASK_NUMBER
+        deadline remove (all|TASK_NUMBER)
         deadline tasks
         deadline track
       EOS

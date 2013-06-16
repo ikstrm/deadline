@@ -82,15 +82,22 @@ module Deadline
 
       describe "given a number within range" do
         it "should remove a specific task" do
-          Task.remove(1)
+          Task.remove("1")
           Task.all.size.should == 1
         end
       end
 
       describe "given a number out of range" do
         it "should do nothing" do
-          Task.remove(2)
+          Task.remove("2")
           Task.all.size.should == 2
+        end
+      end
+
+      describe "given 'all'" do
+        it "should remove all tasks" do
+          Task.remove("all")
+          Task.all.size.should == 0
         end
       end
     end
