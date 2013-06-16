@@ -20,7 +20,7 @@ module Deadline
     when "tasks"
       Task.print_tasks
     when "track"
-      puts "pending"
+      Timer.track
     else
       print(<<-"EOS")
       Usage:
