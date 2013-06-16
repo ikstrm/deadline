@@ -1,5 +1,6 @@
 require 'yaml'
 require 'active_support/core_ext'
+require 'terminal-notifier'
 
 module Deadline
   class Task
@@ -48,6 +49,30 @@ module Deadline
           save_config(conf)
         end
       end
+    end
+
+    def self.refresh
+      tasks = Task.all
+      tasks.sort!{ |a, b| a[:deadline] <=> b [:deadline] }
+
+      new_tasks = Array.new
+      tasks.each do |task|
+        if task[:deadline] - Time.now > 0
+          new_tasks.push(task)
+        else
+          push_notify(task)
+        end
+      end
+
+      save_config({tasks: new_tasks})
+    end
+
+    def self.push_notify(task)
+      TerminalNotifier.notify(
+        nil,
+        title: 'Deadline end',
+        subtitle: task[:task]
+      )
     end
 
     def self.print_tasks

@@ -138,6 +138,7 @@ module Deadline
         end
 
         it "should remove the task" do
+          Task.refresh
           tasks = Task.all
           tasks.size.should == 0
         end
