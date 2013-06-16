@@ -77,19 +77,28 @@ module Deadline
 
     def self.string_to_time(string)
       case string
-      when /[0-9]+/
+      when /^[0-9]+$/
         Time.now + string.to_i * 60
-      when /(([0-9]|)[0-9]):([0-9][0-9])/
-        today_time = Time.now
-        today_time.hour = $1
-        today_time.min = $3
-        today_time.sec = 0
+      when /^(([0-9]|)[0-9]):([0-9][0-9])$/
+        today_time = Time.local(
+          Date.today.year,
+          Date.today.month,
+          Date.today.day,
+          $1,
+          $3,
+          0
+        )
         if today_time - Time.now >= 0
           today_time
         else
-          tomorrow_time = today_time
-          tomorrow_time.day += 1
-          tomorrow_time
+          tomorrow_time = Time.local(
+            Date.tomorrow.year,
+            Date.tomorrow.month,
+            Date.tomorrow.day,
+            $1,
+            $3,
+            0
+          )
         end
       else
         nil
