@@ -14,7 +14,7 @@ module Deadline
     when "remove"
       puts "pending"
     when "tasks"
-      puts "pending"
+      ;
     when "track"
       puts "pending"
     else

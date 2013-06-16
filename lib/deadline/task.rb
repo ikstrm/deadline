@@ -1,4 +1,5 @@
 require 'yaml'
+require 'active_support/core_ext'
 
 module Deadline
   class Task
@@ -40,6 +41,13 @@ module Deadline
           tasks: tasks
         }
         save_config(conf)
+      end
+    end
+
+    def self.print_tasks
+      tasks = Task.all
+      tasks.each do |task|
+        ;puts
       end
     end
 
