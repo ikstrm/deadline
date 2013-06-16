@@ -21,6 +21,13 @@ module Deadline
       Curses.init_pair LABEL_WHITE, Curses::COLOR_WHITE, Curses::COLOR_BLACK
 
       loop do
+        Task.refresh
+        tasks = Task.all
+        if tasks.size == 0
+          Curses.close_screen
+          break
+        end
+
         tasks.each_with_index do |task, idx|
           last_time = ""
           line_pos = Curses.lines / 2

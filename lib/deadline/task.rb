@@ -76,6 +76,7 @@ module Deadline
     end
 
     def self.print_tasks
+      Task.refresh
       tasks = Task.all
       if tasks == nil || tasks.size == 0
         puts "No task available"
