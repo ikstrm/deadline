@@ -56,6 +56,8 @@ module Deadline
 
         Curses.refresh
         sleep(1)
+        Curses.close_screen
+        Curses.init_screen
       end
     end
 
