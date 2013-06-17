@@ -1,6 +1,13 @@
 # Deadline
 
-TODO: Write a gem description
+Manage your task's deadlines  
+![Screen Shot 1](https://raw.github.com/ikstrm/deadline/master/img/ss1.png)  
+
+Keep your pace  
+![Screen Shot 2](https://raw.github.com/ikstrm/deadline/master/img/ss2.png)  
+
+Desktop notification  
+![Screen Shot 3](https://raw.github.com/ikstrm/deadline/master/img/ss3.png)  
 
 ## Installation
 
@@ -18,8 +25,13 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
-
+    $ deadline add "task name1" 60   # the task's deadline will be 60min from now
+    $ deadline add "task name2" 1:00 # the task's deadline will be 1:00
+    $ deadline tasks                 # show task list
+    $ deadline remove 0              # remove first task from task list
+    $ deadline track                 # show timer and start desktop notification
+    $ deadline remove all            # remove all tasks
+    
 ## Contributing
 
 1. Fork it
