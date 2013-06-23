@@ -20,6 +20,8 @@ module Deadline
       Curses.init_pair LABEL_RED, Curses::COLOR_RED, Curses::COLOR_BLACK
       Curses.init_pair LABEL_WHITE, Curses::COLOR_WHITE, Curses::COLOR_BLACK
 
+      past_task_num = Task.all.size
+
       loop do
         Task.refresh
         tasks = Task.all
@@ -27,6 +29,12 @@ module Deadline
           Curses.close_screen
           break
         end
+
+        if tasks.size < past_task_num
+          Curses.close_screen
+          Curses.init_screen
+        end
+        past_task_num = tasks.size
 
         tasks.each_with_index do |task, idx|
           last_time = ""
@@ -56,8 +64,6 @@ module Deadline
 
         Curses.refresh
         sleep(1)
-        Curses.close_screen
-        Curses.init_screen
       end
     end
 

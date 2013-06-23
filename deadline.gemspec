@@ -25,4 +25,5 @@ Gem::Specification.new do |spec|
   spec.add_dependency "active_support"
   spec.add_dependency "i18n"
   spec.add_dependency "terminal-notifier", '~> 1.4'
+  spec.add_dependency "ruby-growl"
 end

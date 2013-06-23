@@ -1,6 +1,7 @@
 require 'yaml'
 require 'active_support/core_ext'
 require 'terminal-notifier'
+require 'ruby-growl'
 
 module Deadline
   class Task
@@ -68,11 +69,17 @@ module Deadline
     end
 
     def self.push_notify(task)
-      TerminalNotifier.notify(
-        nil,
-        title: 'Deadline end',
-        subtitle: task[:task]
-      )
+      begin
+        growl = Growl.new "localhost", "deadline"
+        growl.add_notification "deadline"
+        growl.notify "deadline", "Deadline End", task[:task]
+      rescue
+        TerminalNotifier.notify(
+          nil,
+          title: 'Deadline End',
+          subtitle: task[:task]
+        )
+      end
     end
 
     def self.print_tasks
