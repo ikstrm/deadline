@@ -22,7 +22,8 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency "rake"
   spec.add_development_dependency "rspec"
 
-  spec.add_dependency "active_support"
+  spec.add_dependency "activesupport", "~> 3.0.0"
+  spec.add_dependency "curses"
   spec.add_dependency "i18n"
   spec.add_dependency "terminal-notifier", '~> 1.4'
   spec.add_dependency "ruby-growl"
