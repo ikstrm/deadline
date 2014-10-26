@@ -6,11 +6,11 @@ require 'deadline/version'
 Gem::Specification.new do |spec|
   spec.name          = "deadline"
   spec.version       = Deadline::VERSION
-  spec.authors       = ["ikstrm"]
-  spec.email         = ["kokubun.t.aa@m.titech.ac.jp"]
+  spec.authors       = ["Takashi Kokubun"]
+  spec.email         = ["takashikkbn@gmail.com"]
   spec.description   = %q{Manage deadlines of your tasks and show timer for you}
   spec.summary       = %q{Manage deadlines of your tasks}
-  spec.homepage      = "https://github.com/ikstrm/deadline"
+  spec.homepage      = "https://github.com/k0kubun/deadline"
   spec.license       = "MIT"
 
   spec.files         = `git ls-files`.split($/)
